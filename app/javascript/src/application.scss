@@ -1,0 +1,33 @@
+@import '~bootstrap/scss/bootstrap';
+@import 'swiper/swiper-bundle.css';
+@import 'swiper/modules/navigation/navigation.scss';
+@import 'swiper/modules/pagination/pagination.scss';
+
+$breakpoints: (
+  sp: 599px
+);
+
+@mixin sp {
+  @media only screen and (max-width: map-get($breakpoints, sp)) {
+    @content;
+  }
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  @include sp {
+    font-size: 20px;
+  }
+}
+
+.swiper-button-next {
+  @include sp {
+    right: 0;
+  }
+}
+
+.swiper-button-prev {
+  @include sp {
+    left: 0;
+  }
+}
