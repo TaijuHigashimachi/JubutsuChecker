@@ -13,6 +13,7 @@ $breakpoints: (
   }
 }
 
+// /
 .swiper-button-next:after,
 .swiper-button-prev:after {
   @include sp {
@@ -30,4 +31,9 @@ $breakpoints: (
   @include sp {
     left: 0;
   }
+}
+
+// admin
+.navbar {
+  justify-content: start;
 }
