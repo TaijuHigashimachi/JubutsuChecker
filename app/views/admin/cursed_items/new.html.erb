@@ -1,2 +1,12 @@
-<h1>Admin::CursedItems#new</h1>
-<p>Find me in app/views/admin/cursed_items/new.html.erb</p>
+<% content_for(:title, '呪物の追加') %>
+<h1>呪物の追加</h1>
+<%= form_with CursedItems: @cursed_item do |f| %>
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.label :youtube_id, class: 'form-label' %>
+    <%= f.text_field :youtube_id, class: 'form-control' %>
+    <%= f.fields_for :cursed_item_objective_names do |ff| %>
+      <%= ff.collection_select :name, ObjectName.all, :id, :name %>
+    <% end %>
+    <%= f.submit '追加' %>
+<% end %>
