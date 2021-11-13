@@ -1,0 +1,17 @@
+<div class="text-center">
+  <%= link_to new_admin_object_name_path do %>
+    <button type="button" class="btn btn-primary">ObjectNameを追加する</button>
+  <% end %>
+</div>
+<h1 class="mt-3">Object Name一覧</h1>
+<table class="table mt-3">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @object_names %>
+    </tbody>
+  </table>

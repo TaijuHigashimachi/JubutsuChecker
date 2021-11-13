@@ -1,9 +1,11 @@
 class Admin::CursedItemsController < Admin::BaseController
   def index
+    @cursed_items = CursedItem.all
   end
 
   def new
     @cursed_item = CursedItem.new
+    3.times { @cursed_item.cursed_item_objective_names.build }
   end
 
   def create
