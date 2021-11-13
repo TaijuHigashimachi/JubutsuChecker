@@ -1,0 +1,14 @@
+<div class="card w-50">
+  <iframe class="card-img-top" loading="lazy"  src="https://www.youtube.com/embed/<%= cursed_item.youtube_id %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="card-body">
+    <p class="fs-3"><%= cursed_item.id %>．<%= cursed_item.name %></p>
+    <div class="text-center">
+      <%= link_to edit_admin_cursed_item_path(cursed_item), class:'text-decoration-none' do %>
+        <button type="button" class="btn btn-warning me-3 ">編集</button>
+      <% end %>
+      <%= link_to admin_cursed_item_path(cursed_item), method: :delete, data: { confirm: '本当に削除しますか？' } do %>
+        <button type="button" class="btn btn-danger">削除</button>
+      <% end %>
+    </div>
+  </div>
+</div>

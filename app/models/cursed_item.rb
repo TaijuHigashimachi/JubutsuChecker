@@ -7,9 +7,9 @@
 #
 
 class CursedItem < ApplicationRecord
-  has_many :cursed_item_objective_names, dependent: :destroy
-  accepts_nested_attributes_for :cursed_item_objective_names, allow_destroy: true
-  has_many :object_names, through: :cursed_item_objective_names
+  has_many :labelings, dependent: :destroy
+  has_many :label_names, through: :labelings
+  accepts_nested_attributes_for :labelings, allow_destroy: true
 
   validates :name, presence: true
   validates :youtube_id, presence: true

@@ -15,13 +15,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_010524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cursed_item_objective_names", force: :cascade do |t|
-    t.integer "cursed_item_id"
-    t.integer "object_name_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "cursed_items", force: :cascade do |t|
     t.string "name"
     t.string "youtube_id"
@@ -29,10 +22,21 @@ ActiveRecord::Schema.define(version: 2021_11_13_010524) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "object_names", force: :cascade do |t|
+  create_table "label_names", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "labelings", force: :cascade do |t|
+    t.bigint "cursed_item_id"
+    t.bigint "label_name_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cursed_item_id"], name: "index_labelings_on_cursed_item_id"
+    t.index ["label_name_id"], name: "index_labelings_on_label_name_id"
+  end
+
+  add_foreign_key "labelings", "cursed_items"
+  add_foreign_key "labelings", "label_names"
 end
