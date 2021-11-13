@@ -12,7 +12,7 @@ class Admin::LabelNamesController < Admin::BaseController
     if @label_name.save
       redirect_to new_admin_label_name_path, success: 'Label Nameを作成しました'
     else
-      flash.new[:dange] = 'Label Nameを作成できませんでした'
+      flash.now[:dange] = 'Label Nameを作成できませんでした'
       render :new
     end
   end
