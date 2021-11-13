@@ -1,0 +1,18 @@
+<% content_for(:title, '呪物の追加') %>
+<h1>呪物の追加</h1>
+<%= form_with model: [:admin, @cursed_item] do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.label :youtube_id, class: 'form-label' %>
+    <%= f.text_field :youtube_id, class: 'form-control' %>
+    <%= f.fields_for :labelings do |ff| %>
+      <div>
+        <%= ff.label :label_name %>
+      </div>
+      <div>
+        <%= ff.collection_select :label_name_id, LabelName.all, :id, :name, include_blank: true %>
+      </div>
+    <% end %>
+    <%= f.submit '追加', class: 'btn btn-primary mt-3' %>
+<% end %>

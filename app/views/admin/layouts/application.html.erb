@@ -11,10 +11,10 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
-    <div class="container mb-5">
+    <%= render 'admin/shared/header' %>
+    <%= render 'shared/flash_message' %>
+    <div class="container mt-5">
       <%= yield %>
     </div>
-    <%= render 'shared/footer' %>
   </body>
 </html>

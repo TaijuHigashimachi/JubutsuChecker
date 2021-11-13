@@ -13,6 +13,7 @@ $breakpoints: (
   }
 }
 
+// /
 .swiper-button-next:after,
 .swiper-button-prev:after {
   @include sp {
@@ -30,4 +31,28 @@ $breakpoints: (
   @include sp {
     left: 0;
   }
+}
+
+// admin
+.navbar {
+  justify-content: start;
+}
+
+.card {
+  max-width: 600px;
+}
+
+.youtube {
+  width:100%;
+  padding-bottom: 56.25%;
+  height:0px;
+  position: relative;
+}
+
+.youtube iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
