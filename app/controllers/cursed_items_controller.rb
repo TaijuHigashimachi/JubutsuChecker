@@ -5,7 +5,8 @@ class CursedItemsController < ApplicationController
   def top; end
 
   def result
-    encoded_image = Base64.encode64(params[:upload_image].read)
+    @upload_image = params[:upload_image]
+    encoded_image = Base64.encode64(@upload_image.read)
 
     vision_api_url = URI("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBzFRr3ebRmhyDwmg2lmMi8rAKXig94Hfo")
     headers = { "Content-Type" => "application/json" }
