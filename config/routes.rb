@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'labelings/index'
-    get 'labelings/new'
-    get 'labelings/create'
-    get 'labelings/edit'
-    get 'labelings/update'
-    get 'labelings/destroy'
-  end
-  root 'checks#top'
+  root 'cursed_items#top'
+  post '/result', to: 'cursed_items#result'
 
   namespace :admin do
     root 'cursed_items#index'
