@@ -19,3 +19,8 @@
     </div>
   <% end %>
 </div>
+<div class="mt-3 text-center">
+  <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=呪物を#{ @label_names.size }つ検出しました&hashtags=呪物チェッカー,呪術廻戦", title: 'Twitter', target: '_blank' do %>
+    <button name="button" class="btn btn-info">Twitterでシェア</button>
+  <% end %>
+</div>
