@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'cursed_items#top'
+  get '/index', to: 'cursed_items#index'
+  get '/result', to: 'cursed_items#result'
   post '/result', to: 'cursed_items#result'
 
   namespace :admin do

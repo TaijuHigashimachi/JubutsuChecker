@@ -1,8 +1,13 @@
 class CursedItemsController < ApplicationController
+  include Pagy::Backend
   require "google/cloud/vision"
   require 'net/https'
 
   def top; end
+
+  def index
+    @pagy, @cursed_items = pagy(CursedItem.all, items: 2)
+  end
 
   def result
     if params[:upload_image]

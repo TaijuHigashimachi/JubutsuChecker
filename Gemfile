@@ -28,6 +28,9 @@ gem 'dotenv-rails'
 # API
 gem 'google-cloud-vision'
 
+# Pagination
+gem 'pagy'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
