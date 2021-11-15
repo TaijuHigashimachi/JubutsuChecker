@@ -31,6 +31,9 @@ gem 'google-cloud-vision'
 # Pagination
 gem 'pagy'
 
+# Static pages
+gem 'high_voltage'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

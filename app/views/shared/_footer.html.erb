@@ -5,11 +5,11 @@
         <%= link_to '呪物チェッカー', root_path, class: 'fs-3 text-white text-decoration-none' %>
         <div>
           <div class="d-block">
-            <%= link_to 'お問い合わせ', '#', class: 'text-white text-decoration-none me-1' %>
-            <%= link_to '利用規約', '#', class: 'text-white text-decoration-none me-1' %>
+            <%= link_to 'お問い合わせ', page_path('contact'), class: 'text-white text-decoration-none me-1' %>
+            <%= link_to '利用規約', page_path('terms'), class: 'text-white text-decoration-none me-1' %>
           </div>
           <div>
-            <%= link_to 'プライバシーポリシー', '#', class: 'text-white text-decoration-none' %>
+            <%= link_to 'プライバシーポリシー', page_path('privacy_policy'), class: 'text-white text-decoration-none' %>
           </div>
         </div>
     </div>
