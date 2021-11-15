@@ -1,6 +1,7 @@
 {
   "name": "jubutsu-checker",
   "private": true,
+  "version": "0.1.0",
   "engines": {
     "node": "15.14.0"
   },
