@@ -45,14 +45,22 @@
 <script>
   window.onload = function() {
     var img = new Image();
+    var data = "data:image/jpeg;base64,<%= @encoded_image %>";
+    img.src = data;
     img.onload = function(){
+      // canvas要素と、グラフィックを描くための2Dオブジェクトを生成
       var canvas = document.querySelector("#canvas");
+      var ctx = canvas.getContext("2d");
+
+      // アップされた画像のアスペクト比を計算し、canvasサイズの高さを合わせる
       var aspectRatio = img.naturalHeight / img.naturalWidth;
       canvas.width = 300;
       canvas.height = 300 * aspectRatio;
-      var ctx = canvas.getContext("2d");
 
+      // canvas要素にimgオブジェクトの内容をコピー
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // 描画内容の設定
       ctx.lineWidth = 3
       ctx.strokeStyle = "rgb(0, 0, 255)"
       ctx.moveTo(34.823275, 12.487037); /* 左上 */
@@ -62,6 +70,5 @@
       ctx.closePath();                  /* 描いた線を閉じる */
       ctx.stroke();                     /* 描いた図形を線で表示させる */
     };
-    img.src = "/assets/22632607.jpg";
   };
 </script>
