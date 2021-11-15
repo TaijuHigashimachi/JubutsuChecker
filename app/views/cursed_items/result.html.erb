@@ -1,7 +1,9 @@
 <p class="fs-2 text-center">チェックの結果...</p>
 <% if @label_names.present? %>
   <p class="fs-1 text-center">以下の呪物の可能性が<br />検出されました</p>
-  <img src="<%= cookies[:jubutsuchecker].open %>">
+  <div class="text-center mb-5">
+    <%= image_tag "data:image/jpeg;base64,#{@encoded_image}", width: '300' %>
+  </div>
   <% @label_names.size.times do |i| %>
     <div class="card border-0 mx-auto mb-5">
       <span class="fs-3 text-center fw-bold"><%= @label_names[i].cursed_items[0].name %></span>
