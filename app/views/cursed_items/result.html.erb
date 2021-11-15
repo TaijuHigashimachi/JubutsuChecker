@@ -1,7 +1,9 @@
 <p class="fs-2 text-center">チェックの結果...</p>
-<% if @label_name %>
+<% if @label_names.present? %>
   <p class="fs-1 text-center">以下の呪物の可能性が<br />検出されました</p>
-  <%= image_tag "#{@upload_image.path}" %>
+  <div class="text-center mb-5">
+    <%= image_tag "data:image/jpeg;base64,#{@encoded_image}", width: '300' %>
+  </div>
   <% @label_names.size.times do |i| %>
     <div class="card border-0 mx-auto mb-5">
       <span class="fs-3 text-center fw-bold"><%= @label_names[i].cursed_items[0].name %></span>
@@ -26,7 +28,7 @@
     <% end %>
   </div>
 <% else %>
-  <p class="fs-1 text-center">安心してください！<br />呪物は検出<br />されませんでした</p>
+  <p class="fs-2 text-center">安心してください！<br />呪物は見つかりませんでした！</p>
   <div class="mt-5">
     <%= form_with url: result_path do |f| %>
       <div class="form-group">
