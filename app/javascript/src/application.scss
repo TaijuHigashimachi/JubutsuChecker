@@ -1,0 +1,58 @@
+@import '~bootstrap/scss/bootstrap';
+@import 'swiper/swiper-bundle.css';
+@import 'swiper/modules/navigation/navigation.scss';
+@import 'swiper/modules/pagination/pagination.scss';
+
+$breakpoints: (
+  sp: 599px
+);
+
+@mixin sp {
+  @media only screen and (max-width: map-get($breakpoints, sp)) {
+    @content;
+  }
+}
+
+// /
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  @include sp {
+    font-size: 20px;
+  }
+}
+
+.swiper-button-next {
+  @include sp {
+    right: 0;
+  }
+}
+
+.swiper-button-prev {
+  @include sp {
+    left: 0;
+  }
+}
+
+// admin
+.navbar {
+  justify-content: start;
+}
+
+.card {
+  max-width: 600px;
+}
+
+.youtube {
+  width:100%;
+  padding-bottom: 56.25%;
+  height:0px;
+  position: relative;
+}
+
+.youtube iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

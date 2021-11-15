@@ -1,0 +1,9 @@
+<% content_for(:title, '呪物の編集') %>
+<h1>呪物の編集</h1>
+<%= form_with model: [:admin, @cursed_item] do |f| %>
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.label :youtube_id, class: 'form-label' %>
+    <%= f.text_field :youtube_id, class: 'form-control' %>
+    <%= f.submit '編集', class: 'btn btn-primary mt-3' %>
+<% end %>

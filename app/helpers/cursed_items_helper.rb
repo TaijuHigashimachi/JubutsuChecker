@@ -1,0 +1,2 @@
+module CursedItemsHelper
+end
