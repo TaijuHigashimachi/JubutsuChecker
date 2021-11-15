@@ -12,7 +12,7 @@ class CursedItemsController < ApplicationController
   def result
     if params[:upload_image]
       cookies[:jubutsuchecker] = params[:upload_image]
-      @encoded_image = Base64.encode64(params[:upload_image].read)
+      encoded_image = Base64.encode64(params[:upload_image].read)
 
       vision_api_url = URI("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBzFRr3ebRmhyDwmg2lmMi8rAKXig94Hfo")
       headers = { "Content-Type" => "application/json" }
@@ -26,7 +26,7 @@ class CursedItemsController < ApplicationController
               }
             ],
             image: {
-              content: @encoded_image
+              content: encoded_image
             }
           }
         ]
