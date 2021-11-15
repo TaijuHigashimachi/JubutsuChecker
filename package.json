@@ -19,5 +19,23 @@
   "devDependencies": {
     "infinite-scroll": "^4.0.1",
     "webpack-dev-server": "^3"
-  }
+  },
+  "description": "## 1．URL",
+  "main": "babel.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HrkNishimura/JubutsuChecker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HrkNishimura/JubutsuChecker/issues"
+  },
+  "homepage": "https://github.com/HrkNishimura/JubutsuChecker#readme"
 }
