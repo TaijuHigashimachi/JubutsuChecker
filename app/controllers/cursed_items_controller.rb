@@ -30,14 +30,15 @@ class CursedItemsController < ApplicationController
           }
         ]
       }.to_json
-    
+
+      # Vision APIにリクエストを飛ばし、レスポンスをHashに変換
       vision_api_responses = JSON.parse(Net::HTTP.post(vision_api_url, body, headers).body)
 
+      # 検出データから、ラベルの名前を抽出して配列化
       object_name_array = vision_api_responses["responses"][0]["localizedObjectAnnotations"].map { |annotation| annotation["name"]}.uniq
 
-      label_name_array = object_name_array.select { |array_element| LabelName.find_by(name: array_element) }
-
-      @label_names = LabelName.where(name: label_name_array)
+      # 検出データの中で、データベースに登録されているLabelNameのデータだけ抽出
+      @label_names = LabelName.where(name: object_name_array)
     end
   end
 end

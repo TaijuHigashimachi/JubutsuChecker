@@ -57,16 +57,19 @@
       canvas.width = 300;
       canvas.height = 300 * aspectRatio;
 
+      // 縮尺の比率を計算
+      var scaleRatio = canvas.width / img.naturalWidth
+
       // canvas要素にimgオブジェクトの内容をコピー
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
       // 描画内容の設定
       ctx.lineWidth = 3
       ctx.strokeStyle = "rgb(0, 0, 255)"
-      ctx.moveTo(34.823275, 12.487037); /* 左上 */
-      ctx.lineTo(77.49038, 12.487037);  /* 右上 */
-      ctx.lineTo(77.49038, 91.82341);   /* 右下 */
-      ctx.lineTo(34.823275, 91.82341);  /* 左下 */
+      ctx.moveTo(165.0029 * scaleRatio, 216.24815 * scaleRatio); /* 左上 */
+      ctx.lineTo(647.4151 * scaleRatio, 216.24815 * scaleRatio);  /* 右上 */
+      ctx.lineTo(647.4151 * scaleRatio, 579.8438 * scaleRatio);   /* 右下 */
+      ctx.lineTo(165.0029 * scaleRatio, 579.8438 * scaleRatio);  /* 左下 */
       ctx.closePath();                  /* 描いた線を閉じる */
       ctx.stroke();                     /* 描いた図形を線で表示させる */
     };
