@@ -1,7 +1,6 @@
 class CursedItemsController < ApplicationController
   include Pagy::Backend
-  require "google/cloud/vision"
-  require 'net/https'
+  include CursedItemsHelper
 
   def top; end
 
@@ -13,36 +12,18 @@ class CursedItemsController < ApplicationController
     if params[:upload_image]
       @encoded_image = Base64.strict_encode64(params[:upload_image].read)
 
-      vision_api_url = URI("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBzFRr3ebRmhyDwmg2lmMi8rAKXig94Hfo")
-      headers = { "Content-Type" => "application/json" }
-      body = {
-        requests: [
-          {
-            features: [
-              {
-                maxResults: 10,
-                type: "OBJECT_LOCALIZATION"
-              }
-            ],
-            image: {
-              content: @encoded_image
-            }
-          }
-        ]
-      }.to_json
-
-      # Vision APIにリクエストを飛ばし、レスポンスをHashに変換
-      vision_api_responses = JSON.parse(Net::HTTP.post(vision_api_url, body, headers).body)
+      # アップロード画像をVisionAPIに送り、Hashに変換したレスポンスを取得
+      vision_api_responses = request_to_api(@encoded_image)
 
       # 検出データから、ラベルの名前を抽出して配列化
-      object_name_array = vision_api_responses["responses"][0]["localizedObjectAnnotations"].map { |annotation| annotation["name"]}.uniq
+      object_name_array = vision_api_responses.map { |annotation| annotation["name"] }.uniq
 
       # 検出データの中で、データベースに登録されているLabelNameのデータだけ抽出
       @label_names = LabelName.where(name: object_name_array)
       
       # データーベースに登録されているLabelNameのAnnotationsデータだけ、検出データから抽出
-      label_name_array = object_name_array.select { |array_element| LabelName.find_by(name: array_element) }
-      @cursed_item_annotations = vision_api_responses["responses"][0]["localizedObjectAnnotations"].select do |array|
+      label_name_array = object_name_array.select { |object_name| LabelName.find_by(name: object_name) }
+      @cursed_item_annotations = vision_api_responses.select do |array|
                                    label_name_array.include?(array["name"])
                                  end
     end
