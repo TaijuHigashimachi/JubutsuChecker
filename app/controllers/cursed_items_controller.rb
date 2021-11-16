@@ -19,8 +19,13 @@ class CursedItemsController < ApplicationController
       object_name_array = vision_api_responses.map { |annotation| annotation["name"] }.uniq
 
       # 検出データの中で、データベースに登録されているLabelNameのデータだけ抽出
-      @label_names = LabelName.where(name: object_name_array)
-      
+      label_names = LabelName.where(name: object_name_array)
+
+      # label_namesに紐付いているcursed_itemデータを取得
+      labelings = Labeling.where(label_name_id: label_names.ids)
+      cursed_item_ids = labelings.map { |array| array.cursed_item_id }
+      @cursed_items = CursedItem.where(id: cursed_item_ids)
+
       # データーベースに登録されているLabelNameのAnnotationsデータだけ、検出データから抽出
       label_name_array = object_name_array.select { |object_name| LabelName.find_by(name: object_name) }
       @cursed_item_annotations = vision_api_responses.select do |array|

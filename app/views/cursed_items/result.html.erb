@@ -1,17 +1,10 @@
 <p class="fs-2 text-center">チェックの結果...</p>
-<% if @label_names.present? %>
+<% if @cursed_items %>
   <p class="fs-1 text-center">以下の呪物の可能性が<br />検出されました</p>
   <div class="text-center mb-5">
     <canvas id="canvas"></canvas>
   </div>
-  <% @label_names.size.times do |i| %>
-    <div class="card border-0 mx-auto mb-5">
-      <span class="fs-3 text-center fw-bold"><%= @label_names[i].cursed_items[0].name %></span>
-      <div class="youtube">
-        <iframe loading="lazy"  src="https://www.youtube.com/embed/<%= @label_names[i].cursed_items[0].youtube_id %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-  <% end %>
+  <%= render @cursed_items %>
   <div class="mt-5">
     <%= form_with url: result_path do |f| %>
       <div class="form-group">
@@ -23,7 +16,7 @@
     <% end %>
   </div>
   <div class="mt-3 text-center">
-    <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=呪物を#{ @label_names.size }つ検出しました&hashtags=呪物チェッカー,呪術廻戦", title: 'Twitter', target: '_blank' do %>
+    <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=呪物を#{ @cursed_items.name }つ検出しました&hashtags=呪物チェッカー,呪術廻戦", title: 'Twitter', target: '_blank' do %>
       <button name="button" class="btn btn-info">Twitterでシェア</button>
     <% end %>
   </div>
@@ -42,7 +35,7 @@
   <p class="mt-5 text-center">呪物がなかなか見つからないときは<br /><%= link_to '呪物一覧', index_path %>を参考にして<br />撮影するモノを変えてみてください</p>
 <% end %>
 
-<% if @label_names.present? %>
+<% if @cursed_item_annotations.present? %>
   <script>
     window.onload = function() {
       var img = new Image();
