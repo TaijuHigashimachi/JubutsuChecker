@@ -68,17 +68,17 @@
       ctx.strokeStyle = "rgb(93, 186, 193)";
       ctx.beginPath();
       ctx.moveTo(
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["x"] %> * 1000  * scaleRatio,
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["y"] %> * 1000  * scaleRatio); // 左上
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["x"] ||= 0 %> * 1000  * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["y"] ||= 0 %> * 1000  * scaleRatio); // 左上
       ctx.lineTo(
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["x"] %> * 1000  * scaleRatio,
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["y"] %> * 1000  * scaleRatio);  // 右上
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["x"] ||= 0 %> * 1000 * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["y"] ||= 0 %> * 1000  * scaleRatio);  // 右上
       ctx.lineTo(
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["x"] %> * 1000  * scaleRatio,
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["y"] %> * 1000  * scaleRatio);   // 右下
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["x"] ||= 0 %> * 1000 * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["y"] ||= 0 %> * 1000 * scaleRatio);   // 右下
       ctx.lineTo(
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["x"] %> * 1000  * scaleRatio,
-        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["y"] %> * 1000  * scaleRatio);  // 左下
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["x"] ||= 0 %> * 1000 * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["y"] ||= 0 %> * 1000 * scaleRatio);  // 左下
       ctx.closePath();                  // 描いた線を閉じる
       ctx.stroke();                     // 描いた図形を線で表示させる
 
