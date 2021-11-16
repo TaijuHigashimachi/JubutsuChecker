@@ -39,6 +39,12 @@ class CursedItemsController < ApplicationController
 
       # 検出データの中で、データベースに登録されているLabelNameのデータだけ抽出
       @label_names = LabelName.where(name: object_name_array)
+      
+      # データーベースに登録されているLabelNameのAnnotationsデータだけ、検出データから抽出
+      label_name_array = object_name_array.select { |array_element| LabelName.find_by(name: array_element) }
+      @cursed_item_annotations = vision_api_responses["responses"][0]["localizedObjectAnnotations"].select do |array|
+                  label_name_array.include?(array["name"])
+                 end
     end
   end
 end

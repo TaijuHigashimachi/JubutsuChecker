@@ -65,11 +65,19 @@
 
       // 描画内容の設定
       ctx.lineWidth = 3
-      ctx.strokeStyle = "rgb(0, 0, 255)"
-      ctx.moveTo(165.0029 * scaleRatio, 216.24815 * scaleRatio); /* 左上 */
-      ctx.lineTo(647.4151 * scaleRatio, 216.24815 * scaleRatio);  /* 右上 */
-      ctx.lineTo(647.4151 * scaleRatio, 579.8438 * scaleRatio);   /* 右下 */
-      ctx.lineTo(165.0029 * scaleRatio, 579.8438 * scaleRatio);  /* 左下 */
+      ctx.strokeStyle = "rgb(93, 186, 193)"
+      ctx.moveTo(
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["x"] %> * 1000  * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["y"] %> * 1000  * scaleRatio); /* 左上 */
+      ctx.lineTo(
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["x"] %> * 1000  * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["y"] %> * 1000  * scaleRatio);  /* 右上 */
+      ctx.lineTo(
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["x"] %> * 1000  * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["y"] %> * 1000  * scaleRatio);   /* 右下 */
+      ctx.lineTo(
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["x"] %> * 1000  * scaleRatio,
+        <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["y"] %> * 1000  * scaleRatio);  /* 左下 */
       ctx.closePath();                  /* 描いた線を閉じる */
       ctx.stroke();                     /* 描いた図形を線で表示させる */
     };
