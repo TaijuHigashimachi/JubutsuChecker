@@ -1,17 +1,10 @@
 <p class="fs-2 text-center">チェックの結果...</p>
-<% if @label_names.present? %>
+<% if @cursed_items %>
   <p class="fs-1 text-center">以下の呪物の可能性が<br />検出されました</p>
   <div class="text-center mb-5">
     <canvas id="canvas"></canvas>
   </div>
-  <% @label_names.size.times do |i| %>
-    <div class="card border-0 mx-auto mb-5">
-      <span class="fs-3 text-center fw-bold"><%= @label_names[i].cursed_items[0].name %></span>
-      <div class="youtube">
-        <iframe loading="lazy"  src="https://www.youtube.com/embed/<%= @label_names[i].cursed_items[0].youtube_id %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-  <% end %>
+  <%= render @cursed_items %>
   <div class="mt-5">
     <%= form_with url: result_path do |f| %>
       <div class="form-group">
@@ -23,7 +16,7 @@
     <% end %>
   </div>
   <div class="mt-3 text-center">
-    <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=呪物を#{ @label_names.size }つ検出しました&hashtags=呪物チェッカー,呪術廻戦", title: 'Twitter', target: '_blank' do %>
+    <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=呪物#{ @cursed_item_names }を検出しました&hashtags=呪物チェッカー,呪術廻戦", title: 'Twitter', target: '_blank' do %>
       <button name="button" class="btn btn-info">Twitterでシェア</button>
     <% end %>
   </div>
@@ -42,33 +35,83 @@
   <p class="mt-5 text-center">呪物がなかなか見つからないときは<br /><%= link_to '呪物一覧', index_path %>を参考にして<br />撮影するモノを変えてみてください</p>
 <% end %>
 
-<script>
-  window.onload = function() {
-    var img = new Image();
-    var data = "data:image/jpeg;base64,<%= @encoded_image %>";
-    img.src = data;
-    img.onload = function(){
-      // canvas要素と、グラフィックを描くための2Dオブジェクトを生成
-      var canvas = document.querySelector("#canvas");
-      var ctx = canvas.getContext("2d");
+<% if @cursed_item_annotations.present? %>
+  <script>
+    window.onload = function() {
+      var img = new Image();
+      var data = "data:image/jpeg;base64,<%= @encoded_image %>";
+      img.src = data;
+      img.onload = function(){
+        // canvas要素と、グラフィックを描くための2Dオブジェクトを生成
+        var canvas = document.querySelector("#canvas");
+        var ctx = canvas.getContext("2d");
 
-      // アップされた画像のアスペクト比を計算し、canvasサイズの高さを合わせる
-      var aspectRatio = img.naturalHeight / img.naturalWidth;
-      canvas.width = 300;
-      canvas.height = 300 * aspectRatio;
+        // アップされた画像のアスペクト比を計算し、canvasサイズの高さを合わせる
+        var aspectRatio = img.naturalHeight / img.naturalWidth;
+        canvas.width = 300;
+        canvas.height = 300 * aspectRatio;
 
-      // canvas要素にimgオブジェクトの内容をコピー
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        // 縮尺の比率を計算
+        var scaleRatio = canvas.width / img.naturalWidth;
 
-      // 描画内容の設定
-      ctx.lineWidth = 3
-      ctx.strokeStyle = "rgb(0, 0, 255)"
-      ctx.moveTo(34.823275, 12.487037); /* 左上 */
-      ctx.lineTo(77.49038, 12.487037);  /* 右上 */
-      ctx.lineTo(77.49038, 91.82341);   /* 右下 */
-      ctx.lineTo(34.823275, 91.82341);  /* 左下 */
-      ctx.closePath();                  /* 描いた線を閉じる */
-      ctx.stroke();                     /* 描いた図形を線で表示させる */
+        // canvas要素にimgオブジェクトの内容をコピー
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // 描画内容の設定
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "rgb(93, 186, 193)";
+        ctx.beginPath();
+        ctx.moveTo(
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["x"] ||= 0 %> * 1000  * scaleRatio,
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["y"] ||= 0 %> * 1000  * scaleRatio); // 左上
+        ctx.lineTo(
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["x"] ||= 0 %> * 1000 * scaleRatio,
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["y"] ||= 0 %> * 1000  * scaleRatio);  // 右上
+        ctx.lineTo(
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["x"] ||= 0 %> * 1000 * scaleRatio,
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["y"] ||= 0 %> * 1000 * scaleRatio);   // 右下
+        ctx.lineTo(
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["x"] ||= 0 %> * 1000 * scaleRatio,
+          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["y"] ||= 0 %> * 1000 * scaleRatio);  // 左下
+        ctx.closePath();                  // 描いた線を閉じる
+        ctx.stroke();                     // 描いた図形を線で表示させる
+
+        <%  if @cursed_item_annotations[1] %>
+          ctx.beginPath();
+          ctx.moveTo(
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][0]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][0]["y"] %> * 1000  * scaleRatio);
+          ctx.lineTo(
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][1]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][1]["y"] %> * 1000  * scaleRatio);
+          ctx.lineTo(
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][2]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][2]["y"] %> * 1000  * scaleRatio);
+          ctx.lineTo(
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][3]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][3]["y"] %> * 1000  * scaleRatio);
+          ctx.closePath();
+          ctx.stroke();
+        <% end %>
+
+        <%  if @cursed_item_annotations[2] %>
+          ctx.beginPath();
+          ctx.moveTo(
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][0]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][0]["y"] %> * 1000  * scaleRatio);
+          ctx.lineTo(
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][1]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][1]["y"] %> * 1000  * scaleRatio);
+          ctx.lineTo(
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][2]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][2]["y"] %> * 1000  * scaleRatio);
+          ctx.lineTo(
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][3]["x"] %> * 1000  * scaleRatio,
+            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][3]["y"] %> * 1000  * scaleRatio);
+          ctx.closePath();
+          ctx.stroke();
+        <% end %>
+      };
     };
-  };
-</script>
+  </script>
+<% end %>

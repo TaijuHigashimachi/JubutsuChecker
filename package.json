@@ -1,6 +1,10 @@
 {
   "name": "jubutsu-checker",
   "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": "15.14.0"
+  },
   "dependencies": {
     "@popperjs/core": "^2.10.2",
     "@rails/actioncable": "^6.0.0",
@@ -8,6 +12,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
     "bootstrap": "^5.1.3",
+    "infinite-scroll": "^4.0.1",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "swiper": "^7.2.0",
@@ -17,7 +22,24 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "infinite-scroll": "^4.0.1",
     "webpack-dev-server": "^3"
-  }
+  },
+  "description": "## 1．URL",
+  "main": "babel.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HrkNishimura/JubutsuChecker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HrkNishimura/JubutsuChecker/issues"
+  },
+  "homepage": "https://github.com/HrkNishimura/JubutsuChecker#readme"
 }
