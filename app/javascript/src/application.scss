@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'swiper/swiper-bundle.css';
 @import 'swiper/modules/navigation/navigation.scss';
 @import 'swiper/modules/pagination/pagination.scss';
@@ -13,7 +14,59 @@ $breakpoints: (
   }
 }
 
-// /
+@font-face {
+  font-family: “ShipporiMincho-Regular”;
+  src: url('/assets/ShipporiMincho-Regular.otf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fs-6 {
+  font-size: 14px !important;
+}
+
+// 全体
+body {
+  min-height: 1080px;
+  background:-webkit-gradient(radial, center center, center center, from(#262626), to(#013C78));
+  background:-webkit-radial-gradient(center, circle cover, #262626, #013C78);
+  background:-moz-radial-gradient(center, circle cover, #262626, #013C78);
+  background:-o-radial-gradient(center, circle cover, #262626, #013C78);
+  background:radial-gradient(#262626, #013C78);
+  text-decoration: none;
+  font-family: “ShipporiMincho-Regular”;
+  color: #fff;
+  .img-fluid {
+    max-height: 150px;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .container {
+    max-width: 600px;
+  }
+  label {
+    background-color: #D99829 !important;
+  }
+  input[type="file"] {
+      display: none;
+  }
+  .btn {
+    background-color: #DE4A40;
+    color: #fff;
+    width: 215px;
+  }
+  @include sp {
+    min-height: 800px;
+  }
+}
+
+// top_page
+.swiper {
+  // background-color: #75B1EE;
+}
+
 .swiper-button-next:after,
 .swiper-button-prev:after {
   @include sp {
@@ -31,6 +84,11 @@ $breakpoints: (
   @include sp {
     left: 0;
   }
+}
+
+// result
+.btn-twitter {
+  background-color: #1A8CD8 !important;
 }
 
 // admin
