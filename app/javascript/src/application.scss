@@ -4,6 +4,7 @@
 @import 'swiper/modules/navigation/navigation.scss';
 @import 'swiper/modules/pagination/pagination.scss';
 
+// 全体
 $breakpoints: (
   sp: 599px
 );
@@ -21,11 +22,6 @@ $breakpoints: (
   font-style: normal;
 }
 
-.fs-6 {
-  font-size: 14px !important;
-}
-
-// 全体
 body {
   min-height: 1080px;
   background:-webkit-gradient(radial, center center, center center, from(#262626), to(#013C78));
@@ -50,7 +46,7 @@ body {
     background-color: #D99829 !important;
   }
   input[type="file"] {
-      display: none;
+    display: none;
   }
   .btn {
     background-color: #DE4A40;
@@ -62,11 +58,11 @@ body {
   }
 }
 
-// top_page
-.swiper {
-  // background-color: #75B1EE;
+.fs-6 {
+  font-size: 14px !important;
 }
 
+// top_page
 .swiper-button-next:after,
 .swiper-button-prev:after {
   @include sp {
