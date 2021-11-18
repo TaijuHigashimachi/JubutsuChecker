@@ -42,7 +42,8 @@ class Admin::CursedItemsController < Admin::BaseController
       :name,
       :youtube_id,
       labelings_attributes:
-        %i[id cursed_item_id label_name_id])
+        %i[id cursed_item_id label_name_id]
+    )
   end
 
   def set_cursed_item

@@ -39,7 +39,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Debugger
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
   # Code analyze
   gem 'rubocop'
@@ -51,9 +51,9 @@ group :development do
   gem 'spring'
 
   gem 'listen', '~> 3.3'
-  gem 'web-console', '>= 4.1.0'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'web-console', '>= 4.1.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
