@@ -27,7 +27,7 @@ class CursedItemsController < ApplicationController
       @cursed_items = CursedItem.where(id: cursed_item_ids)
 
       # Twitterシェア用に、検出された呪物名を配列化
-      @cursed_item_names = @cursed_items.map {  |array| array.name }
+      @cursed_item_array = @cursed_items.map {  |array| array.name }
 
       # データーベースに登録されているLabelNameのAnnotationsデータだけ、検出データから抽出
       label_name_array = object_name_array.select { |object_name| LabelName.find_by(name: object_name) }

@@ -21,7 +21,7 @@
     <% end %>
   </div>
   <div class="mt-3 text-center">
-    <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=呪物#{ @cursed_item_names }を検出しました&hashtags=呪物チェッカー,呪術廻戦", title: 'Twitter', target: '_blank' do %>
+    <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=次の呪物を検出しました%0a#{ @cursed_item_array.map { |a| "【#{a}】" }.join('%0a')  }%0a&hashtags=呪物確認,呪術廻戦", title: 'Twitter', target: '_blank' do %>
       <button name="button" class="btn btn-twitter"><i class="fab fa-twitter me-1"></i>Twitterで結果をシェア</button>
     <% end %>
   </div>
