@@ -1,42 +1,69 @@
-<p class="fs-2 text-center">チェックの結果...</p>
+<p class="my-5 fs-2 text-center">確認の結果...</p>
 <% if @cursed_items %>
-  <p class="fs-1 text-center">以下の呪物の可能性が<br />検出されました</p>
+  <p class="fs-1 text-center text-danger">次の呪物の可能性が<br />検知されました</p>
   <div class="text-center mb-5">
     <canvas id="canvas"></canvas>
   </div>
   <%= render @cursed_items %>
   <div class="mt-5">
     <%= form_with url: result_path do |f| %>
-      <div class="form-group">
-        <%= f.file_field :upload_image, class: 'form-control' %>
-      </div>
       <div class="form-group text-center">
-        <%= f.submit 'もう一度チェック', class: 'btn btn-danger mt-3' %>
+      <label class="btn">
+        <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', class: 'form-control' %>写真を選択する
+      </label>
+    </div>
+      <div class="form-group text-center">
+        <%= f.submit 'もう一度確認', class: 'btn btn-danger mt-3' %>
+      </div>
+      <div class="text-center">
+        <%= image_tag '', id: 'preview', class: 'profile-image mt-3', width: '300' %>
       </div>
     <% end %>
   </div>
   <div class="mt-3 text-center">
     <%= link_to "https://twitter.com/share?url=https://jubutsuchecker.herokuapp.com/&text=呪物#{ @cursed_item_names }を検出しました&hashtags=呪物チェッカー,呪術廻戦", title: 'Twitter', target: '_blank' do %>
-      <button name="button" class="btn btn-info">Twitterでシェア</button>
+      <button name="button" class="btn btn-twitter"><i class="fab fa-twitter me-1"></i>Twitterで結果をシェア</button>
     <% end %>
   </div>
 <% else %>
-  <p class="fs-2 text-center">安心してください！<br />呪物は見つかりませんでした！</p>
+  <p class="fs-1 mt-3 text-center">安心してください<br />呪物はありませんでした</p>
   <div class="mt-5">
     <%= form_with url: result_path do |f| %>
-      <div class="form-group">
-        <%= f.file_field :upload_image, class: 'form-control' %>
-      </div>
       <div class="form-group text-center">
-        <%= f.submit 'もう一度チェック', class: 'btn btn-danger mt-3' %>
+      <label class="btn">
+        <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', class: 'form-control' %>写真を選択する
+      </label>
+    </div>
+      <div class="form-group text-center">
+        <%= f.submit 'もう一度確認', class: 'btn btn-danger mt-3' %>
+      </div>
+      <div class="text-center">
+        <%= image_tag '', id: 'preview', class: 'profile-image mt-3', width: '300' %>
       </div>
     <% end %>
   </div>
-  <p class="mt-5 text-center">呪物がなかなか見つからないときは<br /><%= link_to '呪物一覧', index_path %>を参考にして<br />撮影するモノを変えてみてください</p>
+  <p class="mt-5 text-center">呪物がなかなか見つからないときは<br /><%= link_to '呪物一覧', index_path, class: 'text-decoration-underline' %>を参考にして<br />撮影するモノを変えてみてください</p>
 <% end %>
 
-<% if @cursed_item_annotations.present? %>
-  <script>
+<script>
+  // アップロード写真のプレビュー
+  function previewImage() {
+    const target = this.event.target;
+  const file = target.files[0];
+  const reader  = new FileReader();
+  reader.onloadend = function () {
+    const preview = document.querySelector("#preview")
+      if(preview) {
+        preview.src = reader.result;
+      }
+    }
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // アップロード画像に四角い枠を描画
+  <% if @cursed_item_annotations.present? %>
     window.onload = function() {
       var img = new Image();
       var data = "data:image/jpeg;base64,<%= @encoded_image %>";
@@ -59,7 +86,7 @@
 
         // 描画内容の設定
         ctx.lineWidth = 3;
-        ctx.strokeStyle = "rgb(93, 186, 193)";
+        ctx.strokeStyle = "rgb(190, 54, 75)";
         ctx.beginPath();
         ctx.moveTo(
           <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["x"] ||= 0 %> * 1000  * scaleRatio,
@@ -113,5 +140,5 @@
         <% end %>
       };
     };
-  </script>
-<% end %>
+  <% end %>
+</script>
