@@ -63,6 +63,10 @@ body {
 }
 
 // top_page
+.swiper {
+  border-radius: 3rem;
+}
+
 .swiper-button-next:after,
 .swiper-button-prev:after {
   @include sp {
