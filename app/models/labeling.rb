@@ -10,5 +10,5 @@ class Labeling < ApplicationRecord
   belongs_to :cursed_item
   belongs_to :label_name
 
-  validates :label_name_id, presence: :true
+  validates :label_name_id, presence: true
 end

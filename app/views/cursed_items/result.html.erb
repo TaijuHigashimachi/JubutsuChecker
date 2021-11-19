@@ -1,4 +1,5 @@
-<p class="my-5 fs-2 text-center">確認の結果...</p>
+<% content_for(:title, 'リザルト') %>
+<p class="mb-5 fs-2 text-center">確認の結果...</p>
 <% if @cursed_items %>
   <p class="fs-1 text-center text-danger">次の呪物の可能性が<br />検知されました</p>
   <div class="text-center mb-5">
@@ -9,7 +10,11 @@
     <%= form_with url: result_path do |f| %>
       <div class="form-group text-center">
       <label class="btn">
-        <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', class: 'form-control' %>写真を選択する
+        <% if request.smart_phone? %>
+          <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', capture: 'camera', class: 'form-control' %>1．写真を撮影する
+        <% else %>
+          <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', class: 'form-control' %>1．写真を選択する
+        <% end %>
       </label>
     </div>
       <div class="form-group text-center">
@@ -26,12 +31,18 @@
     <% end %>
   </div>
 <% else %>
-  <p class="fs-1 mt-3 text-center">安心してください<br />呪物はありませんでした</p>
-  <div class="mt-5">
+  <p class="fs-1 mt-3 mb-5 text-center">安心してください<br />呪物はありませんでした</p>
+  <hr>
+  <p class="mt-3 text-center">呪物がなかなか見つからないときは<br /><%= link_to '呪物一覧', index_path, class: 'text-decoration-underline' %>を参考にして<br />撮影するモノを変えてみてください</p>
+  <div class="mt-3">
     <%= form_with url: result_path do |f| %>
       <div class="form-group text-center">
       <label class="btn">
-        <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', class: 'form-control' %>写真を選択する
+        <% if request.smart_phone? %>
+          <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', capture: 'camera', class: 'form-control' %>1．写真を撮影する
+        <% else %>
+          <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', class: 'form-control' %>1．写真を選択する
+        <% end %>
       </label>
     </div>
       <div class="form-group text-center">
@@ -42,7 +53,6 @@
       </div>
     <% end %>
   </div>
-  <p class="mt-5 text-center">呪物がなかなか見つからないときは<br /><%= link_to '呪物一覧', index_path, class: 'text-decoration-underline' %>を参考にして<br />撮影するモノを変えてみてください</p>
 <% end %>
 
 <script>
@@ -87,56 +97,22 @@
         // 描画内容の設定
         ctx.lineWidth = 3;
         ctx.strokeStyle = "rgb(190, 54, 75)";
-        ctx.beginPath();
-        ctx.moveTo(
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["x"] ||= 0 %> * 1000  * scaleRatio,
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][0]["y"] ||= 0 %> * 1000  * scaleRatio); // 左上
-        ctx.lineTo(
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["x"] ||= canvas.width / 1000 %> * 1000 * scaleRatio,
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][1]["y"] ||= 0 %> * 1000  * scaleRatio);  // 右上
-        ctx.lineTo(
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["x"] ||= canvas.width / 1000 %> * 1000 * scaleRatio,
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][2]["y"] ||= canvas.height / 1000 %> * 1000 * scaleRatio);   // 右下
-        ctx.lineTo(
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["x"] ||= 0 %> * 1000 * scaleRatio,
-          <%= @cursed_item_annotations[0]["boundingPoly"]["normalizedVertices"][3]["y"] ||= canvas.height / 1000 %> * 1000 * scaleRatio);  // 左下
-        ctx.closePath();                  // 描いた線を閉じる
-        ctx.stroke();                     // 描いた図形を線で表示させる
-
-        <%  if @cursed_item_annotations[1] %>
+        <% @cursed_item_annotations.each do |a| %>
           ctx.beginPath();
-          ctx.moveTo(
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][0]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][0]["y"] %> * 1000  * scaleRatio);
-          ctx.lineTo(
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][1]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][1]["y"] %> * 1000  * scaleRatio);
-          ctx.lineTo(
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][2]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][2]["y"] %> * 1000  * scaleRatio);
-          ctx.lineTo(
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][3]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[1]["boundingPoly"]["normalizedVertices"][3]["y"] %> * 1000  * scaleRatio);
-          ctx.closePath();
-          ctx.stroke();
-        <% end %>
-
-        <%  if @cursed_item_annotations[2] %>
-          ctx.beginPath();
-          ctx.moveTo(
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][0]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][0]["y"] %> * 1000  * scaleRatio);
-          ctx.lineTo(
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][1]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][1]["y"] %> * 1000  * scaleRatio);
-          ctx.lineTo(
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][2]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][2]["y"] %> * 1000  * scaleRatio);
-          ctx.lineTo(
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][3]["x"] %> * 1000  * scaleRatio,
-            <%= @cursed_item_annotations[2]["boundingPoly"]["normalizedVertices"][3]["y"] %> * 1000  * scaleRatio);
-          ctx.closePath();
-          ctx.stroke();
+          ctx.moveTo( // 左上
+            <%= a["boundingPoly"]["normalizedVertices"][0]["x"] ||= 0 %> * 1000  * scaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][0]["y"] ||= 0 %> * 1000  * scaleRatio);
+          ctx.lineTo( // 右上
+            <%= a["boundingPoly"]["normalizedVertices"][1]["x"] ||= canvas.width / 1000 %> * 1000 * scaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][1]["y"] ||= 0 %> * 1000  * scaleRatio);
+          ctx.lineTo( // 右下
+            <%= a["boundingPoly"]["normalizedVertices"][2]["x"] ||= canvas.width / 1000 %> * 1000 * scaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][2]["y"] ||= canvas.height / 1000 %> * 1000 * scaleRatio);
+          ctx.lineTo( // 左下
+            <%= a["boundingPoly"]["normalizedVertices"][3]["x"] ||= 0 %> * 1000 * scaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][3]["y"] ||= canvas.height / 1000 %> * 1000 * scaleRatio);
+          ctx.closePath();  // 描いた線を閉じる
+          ctx.stroke();     // 描いた図形を線で表示させる
         <% end %>
       };
     };
