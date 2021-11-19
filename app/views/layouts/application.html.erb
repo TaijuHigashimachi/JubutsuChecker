@@ -3,12 +3,21 @@
   <head>
     <title><%= page_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- meta -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- assets -->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- favicon -->
+    <%= favicon_link_tag %>
+    <%= favicon_link_tag('android-chrome-192x192.png', {rel: 'android-touch-icon', sizes: '192*192', type: 'image/png'}) %>
+    <%= favicon_link_tag('apple-touch-icon.png', {rel: 'apple-touch-icon', sizes: '180*180', type: 'image/png'}) %>
   </head>
+
 
   <body>
     <%= render 'shared/header' %>
