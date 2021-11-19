@@ -2,11 +2,12 @@
 <html>
   <head>
     <title><%= page_title(yield(:title)) %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="canonical" href="https://jubutsuchecker.herokuapp.com">
 
     <!-- meta -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <!-- assets -->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
