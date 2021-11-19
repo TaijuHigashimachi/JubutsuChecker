@@ -2,13 +2,44 @@
 <html>
   <head>
     <title><%= page_title(yield(:title)) %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="canonical" href="https://jubutsuchecker.herokuapp.com">
+
+    <!-- meta -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="身の回りのモノを写真に撮ると、それが呪物かどうか確認できるサービスです。呪術廻戦に登場する呪物かどうかも確認できます。">
 
+    <!-- assets -->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- favicon -->
+    <%= favicon_link_tag %>
+    <%= favicon_link_tag('android-chrome-192x192.png', {rel: 'android-touch-icon', sizes: '192*192', type: 'image/png'}) %>
+    <%= favicon_link_tag('apple-touch-icon.png', {rel: 'apple-touch-icon', sizes: '180*180', type: 'image/png'}) %>
+
+    <!-- ogp -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@taiju365" />
+    <meta property="og:site_name" content="呪物確認 - あなたも呪われてるかも" />
+    <meta property="og:title" content="呪物確認 - あなたも呪われてるかも" />
+    <meta property="og:url" content="https://jubutsuchecker.herokuapp.com" />
+    <meta property="og:description"
+      content="身の回りのモノを写真に撮ると、それが呪物かどうか確認できるサービスです。呪術廻戦に登場する呪物かどうかも確認できます。" />
+    <meta property="og:image" content="/assets/ogp_jubutsuchecker.png" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4LSTSVPP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7K4LSTSVPP');
+    </script>
   </head>
+
 
   <body>
     <%= render 'shared/header' %>
