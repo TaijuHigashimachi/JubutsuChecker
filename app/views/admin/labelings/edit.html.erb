@@ -1,2 +1,9 @@
-<h1>Admin::Labelings#edit</h1>
-<p>Find me in app/views/admin/labelings/edit.html.erb</p>
+<% content_for(:title, 'labelingの編集') %>
+<h1>labelingの編集</h1>
+<%= form_with model: [:admin, @labeling] do |f| %>
+    <%= f.label :cursed_item_id, class: 'form-label' %>
+    <%= f.text_field :cursed_item_id, class: 'form-control' %>
+    <%= f.label :label_name_id, class: 'form-label' %>
+    <%= f.text_field :label_name_id, class: 'form-control' %>
+    <%= f.submit '編集', class: 'btn mt-3' %>
+<% end %>
