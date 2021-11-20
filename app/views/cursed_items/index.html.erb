@@ -20,6 +20,8 @@
 </div>
 <hr>
 <h1 class="text-center my-5">呪物一覧</h1>
-<%== pagy_bootstrap_nav(@pagy) %>
+<div class="d-none">
+  <%== pagy_bootstrap_nav(@pagy) %>
+</div>
 <%= render @cursed_items %>
 <%= javascript_pack_tag "infinite-scroll" %>
