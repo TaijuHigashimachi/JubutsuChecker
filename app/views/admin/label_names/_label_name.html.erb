@@ -1,4 +1,6 @@
 <tr>
   <td><%= label_name.id %></td>
   <td><%= label_name.name %></td>
+  <td><%= link_to '編集', edit_admin_label_name_path(label_name) %></td>
+  <td><%= link_to '削除', admin_label_name_path(label_name), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
 </tr>
