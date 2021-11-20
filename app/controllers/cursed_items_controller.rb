@@ -5,7 +5,7 @@ class CursedItemsController < ApplicationController
   def top; end
 
   def index
-    @pagy, @cursed_items = pagy(CursedItem.all, items: 2)
+    @pagy, @cursed_items = pagy(CursedItem.all.order(id: :asc), items: 2)
   end
 
   def result

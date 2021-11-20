@@ -4,7 +4,7 @@ class Admin::CursedItemsController < Admin::BaseController
   before_action :set_cursed_item, only: %i[edit update destroy]
 
   def index
-    @pagy, @cursed_items = pagy(CursedItem.all, items: 2)
+    @pagy, @cursed_items = pagy(CursedItem.all.order(id: :asc), items: 2)
   end
 
   def new
