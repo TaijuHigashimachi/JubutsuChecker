@@ -3,7 +3,7 @@
   <%= form_with url: result_path do |f| %>
     <div class="form-group text-center">
       <label class="btn">
-        <% if request.smart_phone? %>
+        <% if request.smart_phone? || request.tablet? %>
           <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', capture: 'camera', class: 'form-control' %>1．写真を撮影する
         <% else %>
           <%= f.file_field :upload_image, onchange: 'previewImage()', accept: 'image/*', class: 'form-control' %>1．写真を選択する
