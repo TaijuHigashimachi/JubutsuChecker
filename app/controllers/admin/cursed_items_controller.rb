@@ -1,8 +1,10 @@
 class Admin::CursedItemsController < Admin::BaseController
+  include Pagy::Backend
+ 
   before_action :set_cursed_item, only: %i[edit update destroy]
 
   def index
-    @cursed_items = CursedItem.all
+    @pagy, @cursed_items = pagy(CursedItem.all, items: 2)
   end
 
   def new
