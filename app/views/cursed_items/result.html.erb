@@ -89,7 +89,8 @@
         canvas.height = 300 * aspectRatio;
 
         // 縮尺の比率を計算
-        var scaleRatio = canvas.width / img.naturalWidth;
+        var widthScaleRatio = canvas.width / img.naturalWidth;
+        var heightScaleRatio = canvas.height / img.naturalHeight;
 
         // canvas要素にimgオブジェクトの内容をコピー
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -100,17 +101,17 @@
         <% @cursed_item_annotations.each do |a| %>
           ctx.beginPath();
           ctx.moveTo( // 左上
-            <%= a["boundingPoly"]["normalizedVertices"][0]["x"] ||= 0 %> * 1000  * scaleRatio,
-            <%= a["boundingPoly"]["normalizedVertices"][0]["y"] ||= 0 %> * 1000  * scaleRatio);
+            <%= a["boundingPoly"]["normalizedVertices"][0]["x"] ||= 0 %> * 1000  * widthScaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][0]["y"] ||= 0 %> * 1000  * heightScaleRatio);
           ctx.lineTo( // 右上
-            <%= a["boundingPoly"]["normalizedVertices"][1]["x"] ||= canvas.width / 1000 %> * 1000 * scaleRatio,
-            <%= a["boundingPoly"]["normalizedVertices"][1]["y"] ||= 0 %> * 1000  * scaleRatio);
+            <%= a["boundingPoly"]["normalizedVertices"][1]["x"] ||= canvas.width / 1000 %> * 1000 * widthScaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][1]["y"] ||= 0 %> * 1000  * heightScaleRatio);
           ctx.lineTo( // 右下
-            <%= a["boundingPoly"]["normalizedVertices"][2]["x"] ||= canvas.width / 1000 %> * 1000 * scaleRatio,
-            <%= a["boundingPoly"]["normalizedVertices"][2]["y"] ||= canvas.height / 1000 %> * 1000 * scaleRatio);
+            <%= a["boundingPoly"]["normalizedVertices"][2]["x"] ||= canvas.width / 1000 %> * 1000 * widthScaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][2]["y"] ||= canvas.height / 1000 %> * 1000 * heightScaleRatio);
           ctx.lineTo( // 左下
-            <%= a["boundingPoly"]["normalizedVertices"][3]["x"] ||= 0 %> * 1000 * scaleRatio,
-            <%= a["boundingPoly"]["normalizedVertices"][3]["y"] ||= canvas.height / 1000 %> * 1000 * scaleRatio);
+            <%= a["boundingPoly"]["normalizedVertices"][3]["x"] ||= 0 %> * 1000 * widthScaleRatio,
+            <%= a["boundingPoly"]["normalizedVertices"][3]["y"] ||= canvas.height / 1000 %> * 1000 * heightScaleRatio);
           ctx.closePath();  // 描いた線を閉じる
           ctx.stroke();     // 描いた図形を線で表示させる
         <% end %>
