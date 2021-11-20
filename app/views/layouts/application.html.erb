@@ -43,7 +43,11 @@
 
   <body>
     <%= render 'shared/header' %>
-    <div class="container mt-5 mb-4">
+    <% if request.smart_phone? || request.tablet? %>
+      <div class="container mt-3 mb-4">
+    <% else %>
+      <div class="container mt-5 mb-4">
+    <% end %>
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>
