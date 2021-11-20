@@ -3,4 +3,6 @@
   <td><%= cursed_item_name(labeling.cursed_item_id) %></td>
   <td><%= labeling.label_name_id %></td>
   <td><%= label_name(labeling.label_name_id) %></td>
+  <td><%= link_to '編集', edit_admin_labeling_path(labeling) %></td>
+  <td><%= link_to '削除', admin_labeling_path(labeling), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
 </tr>
