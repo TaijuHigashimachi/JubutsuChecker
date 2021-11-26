@@ -20,6 +20,10 @@ module CursedItemsHelper
       ]
     }.to_json
 
-    JSON.parse(Net::HTTP.post(vision_api_url, body, headers).body)['responses'][0]['localizedObjectAnnotations']
+    begin
+      JSON.parse(Net::HTTP.post(vision_api_url, body, headers).body)['responses'][0]['localizedObjectAnnotations']
+    rescue NoMethodError => e
+      return
+    end
   end
 end

@@ -43,6 +43,7 @@
 
   <body>
     <%= render 'shared/header' %>
+    <%= render 'shared/flash_message' %>
     <% if request.smart_phone? || request.tablet? %>
       <div class="container mt-3 mb-4">
     <% else %>
