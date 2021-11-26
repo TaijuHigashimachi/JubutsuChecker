@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/index', to: 'cursed_items#index'
   get '/result', to: 'cursed_items#result'
   post '/result', to: 'cursed_items#result'
+  get '/apology', to: 'cursed_items#apology'
 
   namespace :admin do
     root 'cursed_items#index'
