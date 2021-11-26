@@ -22,6 +22,11 @@ class CursedItemsController < ApplicationController
     # 画像をVisionAPIに送り、Hashに変換したレスポンスを取得
     vision_api_responses = request_to_api(@encoded_image)
 
+    if vision_api_responses.nil?
+      redirect_to root_path, danger: '呪物を確認できるのは、1分に12回までに制限しております。申し訳ございませんが、1分間お待ち下さい。'
+      return
+    end
+
     # レスポンスデータから、検出された物体名（ラベル）を抽出して配列化
     object_name_array = vision_api_responses.map { |a| a['name'] }.uniq
 
