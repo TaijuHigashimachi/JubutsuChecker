@@ -9,12 +9,12 @@ class CursedItemsController < ApplicationController
   def index; end
 
   def result
+    redirect_to apology_path if Access.all.count > 1000
+
     return if params[:upload_image].nil?
 
     # アクセス数計測のため
     Access.create
-
-    redirect_to apology_path if Access.all.count > 1
 
     # ユーザーがアップした画像をエンコード
     @encoded_image = Base64.strict_encode64(params[:upload_image].read)
