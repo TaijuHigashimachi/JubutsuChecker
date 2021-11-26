@@ -1,0 +1,20 @@
+<% content_for(:title, 'お詫び') %>
+<div class="text-center mt-5">
+  <p class="fs-4 text-danger">申し訳ございません。<br />
+  今月はもう呪物が確認できません。</p>
+  <p class="fs-4">代わりと言ってはなんですが、<br />
+  <span class="text-danger">呪物の一覧</span>を用意いたしました。<br />
+  お楽しみいただけると幸いです。</p>
+  <hr>
+  <p class="fs-6">※本サービスでは、料金が高い外部サービスを使用しています。<br />
+  ですが、個人サービスなのでお金がありません。<br />
+  なので、1ヶ月あたりの利用回数を、1,000回までに制限させていただいております。<br />
+  サービスの利用を楽しみにして、このページに訪れたみなさま、申し訳ございません。</p>
+</div>
+<hr>
+<h1 class="text-center my-5">呪物一覧</h1>
+<div class="d-none">
+  <%== pagy_bootstrap_nav(@pagy) %>
+</div>
+<%= render @cursed_items %>
+<%= javascript_pack_tag "infinite-scroll" %>
