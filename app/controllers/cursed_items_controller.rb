@@ -9,7 +9,7 @@ class CursedItemsController < ApplicationController
   def index; end
 
   def result
-    redirect_to apology_path if Access.all.count > 1000
+    redirect_to apology_path if Access.all.count > 990
 
     return if params[:upload_image].nil?
 
