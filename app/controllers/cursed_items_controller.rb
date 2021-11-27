@@ -4,7 +4,9 @@ class CursedItemsController < ApplicationController
 
   before_action :set_cursed_items, only: %i[index apology]
 
-  def top; end
+  def top
+    redirect_to apology_path if Access.all.count > 990
+  end
 
   def index; end
 
