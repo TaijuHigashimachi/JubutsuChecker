@@ -15,8 +15,6 @@ https://jubutsuchecker.herokuapp.com/
 ## トップページ
 ![db5ef52b4571c67da83decba6922491a](https://user-images.githubusercontent.com/46441090/144726647-f0f67b9f-5ddf-4cf4-acad-0bca2880c8b3.gif)  
 トップページでは、写真の撮影・選択ができます。  
-
-呪物が写っているか確認したい写真を撮影、もしくは選択します。  
 パソコンからアクセスした場合は「写真を選択する」のボタンが、スマートフォンからアクセスした場合は「写真を撮影する」のボタンが表示されます。  
 
 ## リザルトページ
