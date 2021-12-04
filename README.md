@@ -35,7 +35,7 @@ https://jubutsuchecker.herokuapp.com/
 呪物の名前とYouTubeの動画IDを保存するテーブルです。  
 
 ## label_namesテーブル、labelingsテーブル
-ラベルの名前と、呪物とラベルの対応関係を保存するテーブルです。  
+呪物とラベルの対応関係を保存するテーブルです。  
 
 本サービスでは物体検出にGoogle Cloud PlatformのVision APIを使用しています。  
 Vision API側の物体名をラベル名としてデータベースに登録し呪物と関連付けておくことで、Vision APIからのレスポンスに応じて関連のある呪物を表示しています。  
