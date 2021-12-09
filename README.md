@@ -8,7 +8,7 @@ https://jubutsuchecker.herokuapp.com/
 マンガ『呪術廻戦』に登場する呪物かどうかも確認できます。  
 
 ### 詳細
-[]()
+[身の回りにある「呪いのアイテム」を検出するサービスを未経験エンジニアが作ってみた【個人開発】](https://qiita.com/taiju365/items/f7c5387ade42bfb5d3cf)
 
 # 3．主な機能
 
